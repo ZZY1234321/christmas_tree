@@ -7,7 +7,7 @@ const foliageMaterial = new THREE.ShaderMaterial({
   uniforms: {
     uTime: { value: 0 },
     uProgress: { value: 0 }, // 0 = Chaos, 1 = Tree
-    uColorHigh: { value: new THREE.Color('#FFD700') }, // 高光金色
+    uColorHigh: { value: new THREE.Color('#8A2BE2') }, // 高光金色
     uColorLow: { value: new THREE.Color('#004225') },  // 深祖母绿
   },
   vertexShader: `

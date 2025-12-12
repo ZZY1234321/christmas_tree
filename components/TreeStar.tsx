@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -25,29 +25,6 @@ export const TreeStar = ({ position, isFormed }: TreeStarProps) => {
     }
   });
 
-  // 创建星芒形状（五角星）
-  const starShape = useMemo(() => {
-    const shape = new THREE.Shape();
-    const outerRadius = 0.5;
-    const innerRadius = 0.25;
-    const spikes = 5;
-    
-    for (let i = 0; i < spikes * 2; i++) {
-      const radius = i % 2 === 0 ? outerRadius : innerRadius;
-      const angle = (i * Math.PI) / spikes;
-      const x = Math.cos(angle) * radius;
-      const y = Math.sin(angle) * radius;
-      
-      if (i === 0) {
-        shape.moveTo(x, y);
-      } else {
-        shape.lineTo(x, y);
-      }
-    }
-    shape.closePath();
-    return shape;
-  }, []);
-
   return (
     <group ref={groupRef} position={position} scale={isFormed ? 1 : 0}>
       {/* 星芒主体 - 使用多个锥体组成星形 */}
@@ -62,10 +39,10 @@ export const TreeStar = ({ position, isFormed }: TreeStarProps) => {
             >
               <coneGeometry args={[0.15, 0.5, 3]} />
               <meshStandardMaterial 
-                color="#FFD700" 
+                color="#8A2BE2" 
                 metalness={0.9} 
                 roughness={0.1}
-                emissive="#FFD700"
+                emissive="#8A2BE2"
                 emissiveIntensity={1.5}
               />
             </mesh>
@@ -75,10 +52,10 @@ export const TreeStar = ({ position, isFormed }: TreeStarProps) => {
         <mesh>
           <cylinderGeometry args={[0.2, 0.2, 0.1, 16]} />
           <meshStandardMaterial 
-            color="#FFD700" 
+            color="#8A2BE2" 
             metalness={0.9} 
             roughness={0.1}
-            emissive="#FFD700"
+            emissive="#8A2BE2"
             emissiveIntensity={1.5}
           />
         </mesh>
@@ -87,7 +64,7 @@ export const TreeStar = ({ position, isFormed }: TreeStarProps) => {
       {/* 发光点光源 */}
       <pointLight
         ref={lightRef}
-        color="#FFD700"
+        color="#8A2BE2"
         intensity={2}
         distance={20}
         decay={2}
@@ -105,7 +82,7 @@ export const TreeStar = ({ position, isFormed }: TreeStarProps) => {
           >
             <sphereGeometry args={[0.1, 8, 8]} />
             <meshBasicMaterial 
-              color="#FFD700" 
+              color="#8A2BE2" 
               transparent 
               opacity={0.6}
             />

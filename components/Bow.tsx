@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -10,25 +10,6 @@ interface BowProps {
 
 export const Bow = ({ position, color = '#FF1493', isFormed }: BowProps) => {
   const groupRef = useRef<THREE.Group>(null);
-  
-  // 创建蝴蝶结形状（使用两个交叉的环）
-  const bowShape = useMemo(() => {
-    const shape = new THREE.Shape();
-    // 左侧环
-    shape.moveTo(-0.3, 0);
-    shape.quadraticCurveTo(-0.5, -0.2, -0.3, -0.4);
-    shape.quadraticCurveTo(-0.1, -0.5, 0, -0.4);
-    shape.quadraticCurveTo(0.1, -0.5, 0.3, -0.4);
-    shape.quadraticCurveTo(0.5, -0.2, 0.3, 0);
-    // 右侧环
-    shape.lineTo(0.3, 0.4);
-    shape.quadraticCurveTo(0.5, 0.2, 0.3, 0);
-    shape.quadraticCurveTo(0.1, 0.1, 0, 0);
-    shape.quadraticCurveTo(-0.1, 0.1, -0.3, 0);
-    shape.quadraticCurveTo(-0.5, 0.2, -0.3, 0.4);
-    shape.lineTo(-0.3, 0);
-    return shape;
-  }, []);
 
   useFrame((state) => {
     if (!groupRef.current) return;
@@ -57,7 +38,7 @@ export const Bow = ({ position, color = '#FF1493', isFormed }: BowProps) => {
       <mesh position={[0, 0, 0.06]}>
         <boxGeometry args={[0.15, 0.15, 0.1]} />
         <meshStandardMaterial 
-          color="#FFD700" 
+          color="#8A2BE2" 
           metalness={0.9} 
           roughness={0.1}
         />

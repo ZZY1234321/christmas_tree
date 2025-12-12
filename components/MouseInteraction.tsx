@@ -1,5 +1,5 @@
-import { useRef, useState, useEffect } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useRef, useEffect } from 'react';
+import { useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Raycaster, Vector2 } from 'three';
 
@@ -8,10 +8,9 @@ interface MouseInteractionProps {
 }
 
 export const MouseInteraction = ({ onMouseMove }: MouseInteractionProps) => {
-  const { camera, scene, gl } = useThree();
+  const { camera, gl } = useThree();
   const raycaster = useRef(new Raycaster());
   const mouse = useRef(new Vector2());
-  const [mousePosition, setMousePosition] = useState<THREE.Vector3 | null>(null);
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -44,10 +43,8 @@ export const MouseInteraction = ({ onMouseMove }: MouseInteractionProps) => {
           Math.sin(angle) * radius
         );
         
-        setMousePosition(treeSurfacePoint);
         onMouseMove(treeSurfacePoint);
       } else {
-        setMousePosition(null);
         onMouseMove(null);
       }
     };

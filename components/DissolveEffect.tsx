@@ -23,7 +23,7 @@ export const DissolveEffect = ({ mousePosition, treePositions, count }: Dissolve
     }
   }, [count]);
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     if (!particlesRef.current || !mousePosition) return;
 
     const positions = particlesRef.current.geometry.attributes.position.array as Float32Array;
@@ -107,7 +107,7 @@ export const DissolveEffect = ({ mousePosition, treePositions, count }: Dissolve
         />
       </bufferGeometry>
       <pointsMaterial
-        color="#FFD700"
+        color="#8A2BE2"
         size={0.1}
         transparent
         opacity={0.8}
