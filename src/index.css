@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Balqis 字体 */
+@font-face {
+  font-family: 'Balqis';
+  src: url('/fonts/BALQIS.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 * {
   margin: 0;
   padding: 0;

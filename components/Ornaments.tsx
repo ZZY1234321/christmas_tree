@@ -1,7 +1,7 @@
 import { useRef, useMemo, useLayoutEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { getTreePosition, getChaosPosition } from '../utils/math';
+import { getOrnamentPosition, getChaosPosition } from '../utils/math';
 
 type OrnamentType = 'heavy' | 'medium' | 'light';
 
@@ -41,11 +41,11 @@ export const Ornaments = ({
     }
   }, [type]);
 
-  // 数据准备
+  // 数据准备 - 使用装饰物专用分布，底部更密集
   const data = useMemo(() => {
     return new Array(count).fill(0).map((_, i) => ({
       chaosPos: getChaosPosition(20), // 散得更开
-      targetPos: getTreePosition(i, count, 5.5, 13), // 略小于树叶范围，内嵌
+      targetPos: getOrnamentPosition(i, count, 5.5, 13), // 使用装饰物专用分布，底部更密集
       currentPos: new THREE.Vector3(),
       rotationSpeed: (Math.random() - 0.5) * 0.001, // 更慢更平滑的旋转
       rotationAxis: new THREE.Vector3(

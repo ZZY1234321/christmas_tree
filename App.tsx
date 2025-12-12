@@ -1,4 +1,4 @@
-import { useState, Suspense } from 'react';
+import { useState, Suspense, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, ContactShadows, Float } from '@react-three/drei';
 import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
@@ -15,46 +15,54 @@ const SPHERE_GEO = new THREE.SphereGeometry(1, 16, 16);
 export default function GrandChristmasTree() {
   const [isFormed, setIsFormed] = useState(false);
   const [mousePosition, setMousePosition] = useState<THREE.Vector3 | null>(null);
+  
+  // 用于区分点击和拖拽
+  const mouseDownRef = useRef<{ x: number; y: number } | null>(null);
+  const isDraggingRef = useRef(false);
 
   return (
     <div className="w-full h-screen bg-black relative font-serif">
       {/* UI 控制层 */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 z-10 pointer-events-none w-full">
-        <h1 className="text-6xl text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] via-[#FFA500] to-[#FFD700] font-light tracking-widest drop-shadow-lg text-center">
+        <h1 className="text-6xl text-transparent bg-clip-text bg-gradient-to-b from-[#FFD700] to-[#FFFFFF] font-thin tracking-widest drop-shadow-lg text-center italic" style={{ fontFamily: 'Balqis, serif' }}>
           Merry Christmas
         </h1>
       </div>
       
-      <button 
-        onClick={(e) => {
-          e.stopPropagation();
-          e.preventDefault();
-          console.log('按钮被点击，当前状态:', isFormed);
-          setIsFormed(!isFormed);
-        }}
-        onMouseDown={(e) => {
-          e.stopPropagation();
-        }}
-        onMouseUp={(e) => {
-          e.stopPropagation();
-        }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-[100] px-8 py-3 
-                   bg-gradient-to-r from-[#B8860B] to-[#FFD700] text-black font-bold text-xl
-                   rounded-full shadow-[0_0_30px_#FFD700] border-2 border-white
-                   hover:scale-110 transition-transform duration-300
-                   cursor-pointer"
-        style={{ 
-          pointerEvents: 'auto',
-          zIndex: 1000
-        }}
-      >
-        {isFormed ? "UNLEASH CHAOS" : "ASSEMBLE TREE"}
-      </button>
-
       <Canvas 
         camera={{ position: [0, 0, 25], fov: 45 }} 
         dpr={[1, 2]}
         gl={{ preserveDrawingBuffer: true }}
+        onPointerDown={(e) => {
+          // 记录鼠标按下位置
+          mouseDownRef.current = { x: e.clientX, y: e.clientY };
+          isDraggingRef.current = false;
+        }}
+        onPointerMove={(e) => {
+          // 如果鼠标移动距离超过阈值，认为是拖拽
+          if (mouseDownRef.current) {
+            const dx = e.clientX - mouseDownRef.current.x;
+            const dy = e.clientY - mouseDownRef.current.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance > 5) { // 5像素的阈值
+              isDraggingRef.current = true;
+            }
+          }
+        }}
+        onPointerUp={(e) => {
+          // 如果移动距离很小且没有拖拽，认为是点击
+          if (mouseDownRef.current && !isDraggingRef.current) {
+            const dx = e.clientX - mouseDownRef.current.x;
+            const dy = e.clientY - mouseDownRef.current.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance <= 5) {
+              console.log('屏幕被点击，当前状态:', isFormed);
+              setIsFormed(!isFormed);
+            }
+          }
+          mouseDownRef.current = null;
+          isDraggingRef.current = false;
+        }}
       >
         <color attach="background" args={['#050805']} />
         
@@ -106,27 +114,9 @@ export default function GrandChristmasTree() {
               
               {/* 2. 豪华装饰物系统 - 减少数量，让树形更清晰 */}
               
-              {/* 重：金色礼物盒 - 慢速归位 */}
-              <Ornaments 
-                count={80} 
-                type="heavy" 
-                color="#FFD700" 
-                geometry={BOX_GEO} 
-                isFormed={isFormed} 
-              />
-              
-              {/* 重：深祖母绿礼物盒 */}
-              <Ornaments 
-                count={60} 
-                type="heavy" 
-                color="#004225" 
-                geometry={BOX_GEO} 
-                isFormed={isFormed} 
-              />
-              
               {/* 中：红色装饰球 */}
               <Ornaments 
-                count={200} 
+                count={500} 
                 type="medium" 
                 color="#DC143C"
                 geometry={SPHERE_GEO} 
@@ -135,7 +125,7 @@ export default function GrandChristmasTree() {
               
               {/* 中：金色装饰球 */}
               <Ornaments 
-                count={180} 
+                count={450} 
                 type="medium" 
                 color="#FFD700"
                 geometry={SPHERE_GEO} 
@@ -144,7 +134,7 @@ export default function GrandChristmasTree() {
               
               {/* 中：深祖母绿装饰球 */}
               <Ornaments 
-                count={150} 
+                count={500} 
                 type="medium" 
                 color="#004225"
                 geometry={SPHERE_GEO} 
@@ -153,7 +143,7 @@ export default function GrandChristmasTree() {
               
               {/* 轻：金色发光灯光 - 快速归位 */}
               <Ornaments 
-                count={300} 
+                count={400} 
                 type="light" 
                 color="#FFD700" 
                 geometry={SPHERE_GEO} 
@@ -162,7 +152,7 @@ export default function GrandChristmasTree() {
               
               {/* 轻：白色发光灯光 */}
               <Ornaments 
-                count={250} 
+                count={350} 
                 type="light" 
                 color="#FFFFFF" 
                 geometry={SPHERE_GEO} 
