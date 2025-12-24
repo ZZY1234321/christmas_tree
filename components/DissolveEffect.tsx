@@ -107,7 +107,7 @@ export const DissolveEffect = ({ mousePosition, treePositions, count }: Dissolve
         />
       </bufferGeometry>
       <pointsMaterial
-        color="#8A2BE2"
+        color="#FFD700"
         size={0.1}
         transparent
         opacity={0.8}

@@ -23,7 +23,7 @@ export default function GrandChristmasTree() {
     <div className="w-full h-screen bg-black relative font-serif">
       {/* UI 控制层 */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 z-10 pointer-events-none w-full">
-        <h1 className="text-6xl text-transparent bg-clip-text bg-gradient-to-b from-[#8A2BE2] to-[#FFFFFF] font-thin tracking-widest drop-shadow-lg text-center italic" style={{ fontFamily: 'Balqis, serif' }}>
+        <h1 className="text-6xl text-transparent bg-clip-text bg-gradient-to-b from-[#FFD700] to-[#FFFFFF] font-thin tracking-widest drop-shadow-lg text-center italic" style={{ fontFamily: 'Balqis, serif' }}>
           Merry Christmas
         </h1>
       </div>
@@ -66,13 +66,13 @@ export default function GrandChristmasTree() {
         <color attach="background" args={['#050805']} />
         
         {/* 奢华的环境光 - 深祖母绿和高光金色 */}
-        <ambientLight intensity={0.5} color="#8A2BE2" />
+        <ambientLight intensity={0.5} color="#FFD700" />
         
         {/* 主光源 - 金色高光 */}
         <directionalLight 
           position={[10, 20, 10]} 
           intensity={1.2} 
-          color="#8A2BE2" 
+          color="#FFD700" 
           castShadow
         />
         
@@ -88,7 +88,7 @@ export default function GrandChristmasTree() {
         {/* 半球光 - 奢华配色 */}
         <hemisphereLight 
           intensity={0.6} 
-          color="#8A2BE2" 
+          color="#FFD700" 
           groundColor="#004225" 
         />
         
@@ -113,11 +113,11 @@ export default function GrandChristmasTree() {
               
               {/* 2. 豪华装饰物系统 - 减少数量，让树形更清晰 */}
               
-              {/* 中：红色装饰球 */}
+              {/* 中：粉色装饰球 */}
               <Ornaments 
                 count={500} 
                 type="medium" 
-                color="#DC143C"
+                color="#FF69B4"
                 geometry={SPHERE_GEO} 
                 isFormed={isFormed} 
               />
@@ -126,7 +126,7 @@ export default function GrandChristmasTree() {
               <Ornaments 
                 count={450} 
                 type="medium" 
-                color="#8A2BE2"
+                color="#FFD700"
                 geometry={SPHERE_GEO} 
                 isFormed={isFormed} 
               />
@@ -140,11 +140,11 @@ export default function GrandChristmasTree() {
                 isFormed={isFormed} 
               />
               
-              {/* 轻：金色发光灯光 - 快速归位 */}
+              {/* 轻：粉色发光灯光 - 快速归位 */}
               <Ornaments 
                 count={400} 
                 type="light" 
-                color="#8A2BE2" 
+                color="#FF69B4" 
                 geometry={SPHERE_GEO} 
                 isFormed={isFormed} 
               />

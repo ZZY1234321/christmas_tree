@@ -41,7 +41,7 @@ export const StarLights = ({ count = 50 }: StarLightProps) => {
         <pointLight
           key={i}
           position={star.position}
-          color="#8A2BE2"
+          color="#FFD700"
           intensity={star.intensity}
           distance={8}
           decay={2}

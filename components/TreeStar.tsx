@@ -39,10 +39,10 @@ export const TreeStar = ({ position, isFormed }: TreeStarProps) => {
             >
               <coneGeometry args={[0.15, 0.5, 3]} />
               <meshStandardMaterial 
-                color="#8A2BE2" 
+                color="#FFD700" 
                 metalness={0.9} 
                 roughness={0.1}
-                emissive="#8A2BE2"
+                emissive="#FFD700"
                 emissiveIntensity={1.5}
               />
             </mesh>
@@ -52,10 +52,10 @@ export const TreeStar = ({ position, isFormed }: TreeStarProps) => {
         <mesh>
           <cylinderGeometry args={[0.2, 0.2, 0.1, 16]} />
           <meshStandardMaterial 
-            color="#8A2BE2" 
+            color="#FFD700" 
             metalness={0.9} 
             roughness={0.1}
-            emissive="#8A2BE2"
+            emissive="#FFD700"
             emissiveIntensity={1.5}
           />
         </mesh>
@@ -64,7 +64,7 @@ export const TreeStar = ({ position, isFormed }: TreeStarProps) => {
       {/* 发光点光源 */}
       <pointLight
         ref={lightRef}
-        color="#8A2BE2"
+        color="#FFD700"
         intensity={2}
         distance={20}
         decay={2}
@@ -82,7 +82,7 @@ export const TreeStar = ({ position, isFormed }: TreeStarProps) => {
           >
             <sphereGeometry args={[0.1, 8, 8]} />
             <meshBasicMaterial 
-              color="#8A2BE2" 
+              color="#FFD700" 
               transparent 
               opacity={0.6}
             />

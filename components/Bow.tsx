@@ -8,7 +8,7 @@ interface BowProps {
   isFormed: boolean;
 }
 
-export const Bow = ({ position, color = '#FF1493', isFormed }: BowProps) => {
+export const Bow = ({ position, color = '#FF69B4', isFormed }: BowProps) => {
   const groupRef = useRef<THREE.Group>(null);
 
   useFrame((state) => {
@@ -38,7 +38,7 @@ export const Bow = ({ position, color = '#FF1493', isFormed }: BowProps) => {
       <mesh position={[0, 0, 0.06]}>
         <boxGeometry args={[0.15, 0.15, 0.1]} />
         <meshStandardMaterial 
-          color="#8A2BE2" 
+          color="#FFD700" 
           metalness={0.9} 
           roughness={0.1}
         />
